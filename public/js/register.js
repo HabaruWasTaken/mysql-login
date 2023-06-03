@@ -1,9 +1,9 @@
 form.addEventListener('submit', ()=>{
     const register = {
-        // name: name.value,
+        username: username.value,
         email: email.value,
-        password: password.value
-        // passwordConfirm: passwordConfirm.value
+        password: password.value,
+        passwordConfirm: passwordConfirm.value
     }
 
     fetch("/api/register", {
@@ -15,13 +15,16 @@ form.addEventListener('submit', ()=>{
     }).then( res => res.json())
     .then(data => {
         if (data.status == "error"){
-            success.style.display = "none"
-            error.style.display = "block"
-            error.innerText = data.error
+          success.style.display = "none"
+          error.style.display = "block"
+          error.innerText = data.error
         } else {
-            error.style.display = "none"
-            success.style.display = "block"
-            success.innerText = data.success
+          error.style.display = "none"
+          success.style.display = "block"
+          success.innerText = data.success
+          setTimeout(()=>{
+            window.open('/login', '_self')
+          }, 3000)
         }
     });
 });

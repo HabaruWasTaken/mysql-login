@@ -37,10 +37,11 @@
             <div class="card-body">
             <h5 class="card-title">Register Form</h5>
                 <form onsubmit="return false;" id="form" method="POST">
-                    <!-- <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name">
-                    </div> -->
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="username" name="username" autocomplete="off" required>
+                    </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -52,10 +53,10 @@
                         <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
                     </div>
 
-                    <!-- <div class="mb-3">
-                        <label for="passwordConfirm" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm">
-                    </div> -->
+                    <div class="mb-3">
+                        <label for="passwordConfirm" class="form-label">Password Confirm</label>
+                        <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" autocomplete="off" required>
+                    </div>
                     
                     <div class="alert alert-danger" role="alert" id="error" style="display: none;">
                         A simple danger alert—check it out!

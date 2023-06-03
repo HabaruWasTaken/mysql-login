@@ -3,7 +3,7 @@ const app = express();
 
 const db = require('./routes/db-config');
 const cookie = require('cookie-parser');
-const PORT = process.env.PORT
+const PORT = process.env['PORT']
 const dotenv = require('dotenv').config();
 
 app.use('/js', express.static(__dirname + "/public/js"));
