@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
+    <link href="css/profile.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Gabut bang</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container my-5">
+        <div class="card mx-auto mt-4 bg-body-tertiary" style="width: 18rem;">
+          <%if (user.profilePicture){%>
+          <div class="profilePicture">              
+            <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" class="card-img-top profileImage" id="profileImage" alt="..." style=""> 
+            <div class="profileHover" id="profileHover">
+              <span class="profileIcon"><i class="fas fa-camera"></i></span>
+            <span class="profileText">Edit Profile</span>
+            </div>
+          </div>
+          <%} else {%>
+          <div class="profilePicture">              
+            <img src="/profile/default.jpg" class="card-img-top profileImage" id="profileImage" alt="..."> 
+            <div class="profileHover" id="profileHover">
+              <span class="profileIcon"><i class="fas fa-camera"></i></span>
+            <span class="profileText">Edit Profile</span>
+            </div>
+          </div>
+          <%}%>
+          <div class="card-body">
+            <form id="form" method="post" encType='multipart/form-data' action='/api/editProfile'>
+      <input type="file" accept=".png, .jpg" style="display: none;" id="inputProfile" name="sampleFile">
+       <input type="hidden" name="id" value="<%=user.id%>">
+      <button type="submit" class="btn btn-outline-light" id="submitProfile" style="display: none;">Change Profile</button>
+    </form>
+            <h5 class="card-title"><%=user.username%></h5>
+            <p class="card-text">Email = <%=user.email%></p>
+            <%if(user.bio){%>
+            <p class="card-text">Bio = <%=user.bio%></p>
+            <%} else {%>
+            <p class="card-text">Bio = -</p>
+            <%}%>
+          </div>
+            <!-- <ul class="list-group list-group-flush list-group-item-dark">
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul> -->
+            <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+              A simple danger alert—check it out!
+            </div>
+            <div class="alert alert-success" role="alert" id="success" style="display: none;">
+              A simple danger alert—check it out!
+            </div>
+            <div class="card-body">
+              <a href="/profile/edit" class="btn btn-outline-light">Edit Profile</a>
+              <a href="/profile/delete" class="btn btn-outline-light disabled">Delete Account</a>
+            </div>
+        </div>
+    </div>
+    <script>
+      profileHover.onclick = () =>{
+        inputProfile.click()
+      }
+
+      document.getElementById("inputProfile").addEventListener("change", validateFile)
+      
+      function validateFile(){
+        const allowedExtensions =  ['jpg','png'],
+              sizeLimit = 5000000; // 1 megabyte
+      
+        // destructuring file name and size from file object
+        const { name:fileName, size:fileSize } = this.files[0];
+      
+        // this.files[0].name = <%=user.id%>
+        // console.log(this.files[0].name)
+      
+        /*
+        * if filename is apple.png, we split the string to get ["apple","png"]
+        * then apply the pop() method to return the file extension
+        *
+        */
+        const fileExtension = fileName.split(".").pop();
+      
+        /* 
+          check if the extension of the uploaded file is included 
+          in our array of allowed file extensions
+        */
+        if(!allowedExtensions.includes(fileExtension)){
+          success.style.display = "none"
+          error.style.display = "block"
+          error.innerText = "File type not allowed"
+          // this.value = null;
+        }else if(fileSize > sizeLimit){
+          success.style.display = "none"
+          error.style.display = "block"
+          error.innerText = "Maximum image size is 5MB"
+          // this.value = null;
+        }
+
+        const file = inputProfile.files[0];
+        const imageType = /image.*/;
+      
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var img = new Image();
+            img.src = reader.result;
+            profileImage.src = reader.result;
+        }
+
+        reader.readAsDataURL(file); 
+        const b = URL.createObjectURL(file)
+        console.log(b)
+        // submitProfile.style.display = "block";
+        submitProfile.click();
+      }
+    </script>
+</body>
+</html>

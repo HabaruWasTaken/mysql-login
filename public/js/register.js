@@ -24,7 +24,7 @@ form.addEventListener('submit', ()=>{
           success.innerText = data.success
           setTimeout(()=>{
             window.open('/login', '_self')
-          }, 3000)
+          }, 1500)
         }
     });
 });

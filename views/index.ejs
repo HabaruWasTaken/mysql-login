@@ -21,8 +21,17 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <%if (status=="loggedIn" ){%>
-              <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
+              <li class="nav-item dropdown">
+                <!-- <a class="nav-link" href="/profile">Profile</a> -->
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" alt="Bootstrap" width="30" height="30">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -44,6 +53,7 @@
 
     <div class="container my-5">
         <div class="card mx-auto mt-4 bg-body-tertiary" style="width: 18rem;">
+          <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" class="card-img-top">
             <div class="card-body">
 
               <%if (status=="loggedIn"){%>

@@ -1,0 +1,51 @@
+
+.profilePicture {
+  position: relative;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.profilePicture:hover .profileHover {
+  opacity: 1;
+}
+
+.profilePicture:hover .profileImage {
+  opacity: 0.5;
+}
+
+.profileImage {
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.profileHover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+}
+
+.profileIcon {
+  color: white;
+  padding-bottom: 8px;
+}
+
+.fas {
+  font-size: 20px;
+}
+
+.profileText {
+  text-transform: uppercase;
+  font-size: 12px;
+  width: 50%;
+  text-align: center;
+}

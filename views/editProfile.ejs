@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile Page</title>
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Gabut bang</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container my-5">
+        <div class="card mx-auto mt-4 bg-body-tertiary" style="width: 18rem;">
+          <!-- <%if (user.profilePicture){%>
+          <img src="/profile/<%=user.profilePicture%>" class="card-img-top" alt="default">
+          <%} else {%>
+          <img src="/profile/default.jpg" class="card-img-top" alt="..."> 
+          <%}%> -->
+          <div class="card-body">
+            <h5 class="card-title">Edit Profile</h5>
+            <!-- <form id="form" method="POST" encType='multipart/form-data' action="/api/edit">-->
+            <form onsubmit="return false;" id="form" method="POST">
+
+                    <!-- <div class="mb-3">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input type="file" accept=".png, .jpg" class="form-control" id="profilePicture" name="profilePicture">
+                    </div> -->
+              
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="<%=user.username%>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="<%=user.email%>">
+                    </div>
+
+                    <!-- <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div> -->
+
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <input type="text" class="form-control" id="bio" name="bio" placeholder="<%=user.bio%>">
+                    </div>
+                    
+                    <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+                        A simple danger alert—check it out!
+                    </div>
+                    <div class="alert alert-success" role="alert" id="success" style="display: none;">
+                        A simple danger alert—check it out!
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-light">Confirm</button>
+                    <a href="/profile" class="btn btn-outline-light">Cancel</a>
+                </form>
+          </div>
+            <!-- <ul class="list-group list-group-flush list-group-item-dark">
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul> -->           
+        </div>
+    </div>
+  <script>
+   
+  form.addEventListener('submit', ()=>{
+
+    // const edit = JSON.parse(editStr)
+      
+    let edit = {
+        username: username.value,
+        email: email.value,
+        bio: bio.value,
+        id: <%=user.id%>
+    }
+
+    fetch("/api/edit", {
+        method: "POST",
+        body: JSON.stringify(edit),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then( res => res.json())
+    .then(data => {
+      
+        if (data.status == "error"){
+          success.style.display = "none"
+          error.style.display = "block"
+          error.innerText = data.error
+        } else {
+          error.style.display = "none"
+          success.style.display = "block"
+          success.innerText = data.success
+          setTimeout(()=>{
+            window.open('/profile', '_self')
+          }, 1500)
+        }
+    });
+});
+    </script>
+</body>
+</html>
