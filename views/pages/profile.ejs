@@ -58,11 +58,11 @@
       <button type="submit" class="btn btn-outline-light" id="submitProfile" style="display: none;">Change Profile</button>
     </form>
             <h5 class="card-title"><%=user.username%></h5>
-            <p class="card-text">Email = <%=user.email%></p>
+            <p class="card-text">Email: <%=user.email%></p>
             <%if(user.bio){%>
-            <p class="card-text">Bio = <%=user.bio%></p>
+            <p class="card-text">Bio: <%=user.bio%></p>
             <%} else {%>
-            <p class="card-text">Bio = -</p>
+            <p class="card-text">Bio: -</p>
             <%}%>
           </div>
             <!-- <ul class="list-group list-group-flush list-group-item-dark">

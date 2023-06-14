@@ -10,26 +10,26 @@
 
     <div class="container my-5">
         <div class="card mx-auto mt-4 bg-body-tertiary" style="width: 18rem;">
+          <%if (status=="loggedIn"){%>
           <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" class="card-img-top">
             <div class="card-body">
 
-              <%if (status=="loggedIn"){%>
               <h5 class="card-title">Welcome back <%= user.username%>!</h5>
-              <h6 class="card-subtitle mb-2 text-body-secondary">Welcome to gabut bang website!</h6>
+              <h6 class="card-subtitle mb-2">Welcome to gabut bang website!</h6>
               <p class="card-text">You check your profile or logout.</p>
               <a href="/profile" class="btn btn-outline-light">Profile</a>
               <a href="/logout" class="btn btn-outline-light">Logout</a>
-
+            </div>
               <%}else{%>
-
+            <div class="card-body">
               <h5 class="card-title">Welcome!</h5>
               <h6 class="card-subtitle mb-2 text-body-secondary">Welcome to gabut bang website!</h6>
               <p class="card-text">You can login or register if you do not have any user.</p>
               <a href="/login" class="btn btn-outline-light">Login</a>
               <a href="/register" class="btn btn-outline-light">Register</a>
-              <%}%>
               
             </div>
+                <%}%>
           </div>
     </div>
 </body>

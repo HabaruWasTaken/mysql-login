@@ -1,0 +1,64 @@
+:root{
+  --border-1:#898989;
+  --border-2:#dfdfdf;
+}
+
+*{
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+.btn{
+  border-color: var(--border-1);
+}
+
+.btn:hover{
+  border-color: var(--border-2)
+}
+
+.form-control {
+  border-color: var(--border-1);
+}
+
+.form-control:hover{
+  border-color: var(--border-2);
+}
+
+  .navbar .navbar-brand {
+    font-weight: 600;
+  }
+
+  .navbar .navbar-brand span{
+    font-weight: 100;
+  }
+
+  .navbar .active {
+    font-weight: 600;
+  }
+
+  .navbar .nav-link:hover{
+    color: #ffffff;
+  }
+
+  .dropdown .active {
+    background-color: #6e747b;
+  }
+  .dropdown a:active{
+    background-color: #4d4d4d;
+  }
+
+  .card {
+    var(--border-1);
+    font-size: 14px;
+  }
+
+  .card-title {
+    color: white;
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+
+.card-subtitle {
+  color: white;
+}

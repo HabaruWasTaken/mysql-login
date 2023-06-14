@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <%- include('../partials/head')%>
+    <title>Login Page</title>
+</head>
+<body>
+    
+    <%- include('../partials/header')%>
+
+      <div class="container my-5">
+        <div class="card mx-auto mt-4 bg-body-tertiary">
+            <div class="card-body">
+            <h5 class="card-title">Login Form</h5>
+                <form onsubmit="return false;" id="form">
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" autocomplete="off" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+                        A simple danger alert—check it out!
+                    </div>
+                    <div class="alert alert-success" role="alert" id="success" style="display: none;">
+                        A simple danger alert—check it out!
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-light">Login</button>
+                </form>
+            </div>
+        </div>
+      </div>
+
+      <script src="js/login.js"></script>
+</body>
+</html>
