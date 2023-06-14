@@ -1,51 +1,40 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary p-3">
-        <div class="container-fluid">
-          <a class="navbar-brand fs-3 text-uppercase" href="/">Ngetes <span>Website</span></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse flex-row-reverse fs-4" id="navbarNav">
-            <ul class="navbar-nav gap-4 align-items-center">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
-              </li>
-              <%if (status=="loggedIn" ){%>
-              <li class="nav-item dropdown">
-                <!-- <a class="nav-link" href="/profile">Profile</a> -->
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           <%if (user.profilePicture) {%>
-            <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" alt="Bootstrap" width="30" height="30" class="rounded-circle">
-           <%} else {%>
-             <img src="/profile/default.jpg" alt="Bootstrap" width="30" height="30" class="rounded-circle">
-           <%}%>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end fs-4 p-0">
-            <li><a class="dropdown-item" href="/profile">Profile</a></li>
-            <li><a class="dropdown-item" href="/profile/edit">Edit Profile</a></li>
-            
-          </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+<%- include('/home/runner/mysql-login/views/partials/head'); %>
+  <title>Home</title>
+</head>
+  
+<body>
+<%- include('/home/runner/mysql-login/views/partials/header'); %>
 
+    <div class="container my-5">
+        <div class="card mx-auto mt-4 bg-body-tertiary" style="width: 18rem;">
+          <%if (status=="loggedIn"){%>
+          <%if (user.profilePicture) {%>
+          <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" class="card-img-top">
+          <%} else {%>
+          <img src="/profile/default.jpg" class="card-img-top">
+          <%}%>
+            <div class="card-body">
+
+              <h5 class="card-title">Welcome back <%= user.username%>!</h5>
+              <h6 class="card-subtitle mb-2">Welcome to gabut bang website!</h6>
+              <p class="card-text">You check your profile or logout.</p>
+              <a href="/profile" class="btn btn-outline-light">Profile</a>
+              <a href="/logout" class="btn btn-outline-light">Logout</a>
+            </div>
               <%}else{%>
-              <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
-              <%}%>
-
-            </ul>
+            <div class="card-body">
+              <h5 class="card-title">Welcome!</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">Welcome to gabut bang website!</h6>
+              <p class="card-text">You can login or register if you do not have any user.</p>
+              <a href="/login" class="btn btn-outline-light">Login</a>
+              <a href="/register" class="btn btn-outline-light">Register</a>
+              
+            </div>
+                <%}%>
           </div>
-        </div>
-      </nav>
-
-<script>
-  $(document).ready(function() {
-  $('li.active').removeClass('active').removeAttr('aria-current');
-  $('a[href="' + location.pathname + '"]').addClass('active').attr('aria-current', 'page'); 
-});
-</script>
+    </div>
+</body>
+</html>
