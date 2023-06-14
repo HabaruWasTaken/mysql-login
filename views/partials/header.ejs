@@ -13,7 +13,11 @@
               <li class="nav-item dropdown">
                 <!-- <a class="nav-link" href="/profile">Profile</a> -->
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <%if (user.profilePicture) {%>
             <img src="/profile/<%=user.id%>.<%=user.profilePicture%>" alt="Bootstrap" width="30" height="30" class="rounded-circle">
+           <%} else {%>
+             <img src="/profile/default.jpg" alt="Bootstrap" width="30" height="30" class="rounded-circle">
+           <%}%>
           </a>
           <ul class="dropdown-menu dropdown-menu-end fs-4 p-0">
             <li><a class="dropdown-item" href="/profile">Profile</a></li>
