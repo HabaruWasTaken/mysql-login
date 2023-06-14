@@ -14,12 +14,22 @@ router.get('/', loggedIn, (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-  res.render('pages/register', { status: 'no', user: "nothing" });
+  if (req.user) {
+    res.render('pages/index', { status: "loggedIn", user: req.user });
+
+  } else {
+    res.render('pages/register', { status: "no", user: "nothing" });
+  }
 });
 
 router.get('/login', (req, res) => {
   // res.sendFile('login.html', {root: "./public/"});
-  res.render('pages/login', { status: 'no', user: "nothing" })
+  if (req.user) {
+    res.render('pages/index', { status: "loggedIn", user: req.user });
+
+  } else {
+    res.render('pages/login', { status: "no", user: "nothing" });
+  }
 });
 
 router.get('/profile', loggedIn, (req, res) => {
